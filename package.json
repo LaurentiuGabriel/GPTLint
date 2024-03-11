@@ -1,0 +1,34 @@
+{
+  "name": "gptlint",
+  "version": "1.0.0",
+  "description": "The AI static analysis tool",
+  "main": "gptlint.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LaurentiuGabriel/GPTLint.git"
+  },
+  "keywords": [
+    "AI",
+    "static",
+    "analysis",
+    "linter",
+    "GPT"
+  ],
+  "author": "Laurentiu Raducu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LaurentiuGabriel/GPTLint/issues"
+  },
+  "bin": {
+    "gptlint": "gptlint.js"
+  },
+  "homepage": "https://github.com/LaurentiuGabriel/GPTLint#readme",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "glob": "^10.3.10",
+    "node-fetch": "^3.3.2"
+  }
+}
