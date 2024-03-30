@@ -10,7 +10,7 @@ GPTLint is a powerful static analysis tool for JavaScript, TypeScript, and TSX f
 ## Installation
 Install GPTLint globally using npm:
 ```
-npm install -g gptlint
+npm install gptlint
 ```
 
 ## Usage
@@ -19,13 +19,13 @@ You can run GPTLint on an individual file or an entire directory. To use GPTLint
 ### Analyzing a Directory
 To analyze all JS, TS, and TSX files in a directory:
 ```
-gptlint /path/to/your/directory
+node .\node_modules\gptlint\gptlint.js /path/to/your/directory
 ```
 
 ### Analyzing a Single File
 To analyze a single file:
 ```
-gptlint /path/to/your/file.js
+node .\node_modules\gptlint\gptlint.js /path/to/your/file.js
 ```
 ### Output
 GPTLint generates an report.html file in your current directory. This file contains a detailed report of the analysis, including suggestions and potential improvements for each file scanned.

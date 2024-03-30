@@ -6,9 +6,13 @@ const { globSync } = require("glob");
 function getFiles(dir, extensions) {
     const pattern = `${dir}/**/*.{${extensions.join(',')}}`;
     const options = {
-        ignore: '**/node_modules/**', 
+        ignore: '**/node_modules/**',
     };
     return globSync(pattern, options);
+}
+
+function escapeFilePathForID(filePath) {
+    return filePath.replace(/\\/g, '/').replace(/\//g, '_');
 }
 
 async function staticAnalysis(content) {
@@ -91,36 +95,37 @@ async function createHTMLReport(filePaths) {
                 <th>File</th>
             </tr>`;
 
-            function formatAnalysisResult(analysisArray) {
-                if (!Array.isArray(analysisArray)) {
-                    console.error('Analysis result is not in expected format:', analysisArray);
-                    return 'Analysis result is not in the expected format.';
-                }
-            
-                return analysisArray.map(item => {
-                    if (item.trim() !== '') {
-                        let formattedItem = item.trim()
-                            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")  
-                            .replace(/`(.*?)`/g, "<code>$1</code>")  
-                            .replace(/^###\s?(.*)$/, "<h3>$1</h3>")  
-                            .replace(/^##\s?(.*)$/, "<h2>$1</h2>");
-            
-                        return `<p>${formattedItem}</p>`;  /
-                    }
-                    return '';  
-                }).join('');
+    function formatAnalysisResult(analysisArray) {
+        if (!Array.isArray(analysisArray)) {
+            console.error('Analysis result is not in expected format:', analysisArray);
+            return 'Analysis result is not in the expected format.';
+        }
+
+        return analysisArray.map(item => {
+            if (item.trim() !== '') {
+                let formattedItem = item.trim()
+                    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                    .replace(/`(.*?)`/g, "<code>$1</code>")
+                    .replace(/^###\s?(.*)$/, "<h3>$1</h3>")
+                    .replace(/^##\s?(.*)$/, "<h2>$1</h2>");
+
+                return `<p>${formattedItem}</p>`;
             }
-            
+            return '';
+        }).join('');
+    }
+
 
 
 
 
     filesAnalysis.forEach(file => {
+        const escapedFilePath = escapeFilePathForID(file.name);
         const formattedAnalysis = formatAnalysisResult(file.analysis);
         html += `<tr>
-                            <td><a href="#${file.name}" onclick="toggleVisibility('${file.name}')">${file.name}</a></td>
+                            <td><a href="#${escapedFilePath}" onclick="toggleVisibility('${escapedFilePath}')">${file.name}</a></td>
                          </tr>
-                         <tr id="${file.name}" class="hidden">
+                         <tr id="${escapedFilePath}" class="hidden">
                             <td>${formattedAnalysis}</td>
                          </tr>`;
     });
@@ -134,7 +139,7 @@ async function createHTMLReport(filePaths) {
 }
 
 async function main() {
-    const targetPath = process.argv[2] || '.'; 
+    const targetPath = process.argv[2] || '.';
     let files;
 
     if (fs.existsSync(targetPath)) {
