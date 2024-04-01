@@ -30,7 +30,7 @@ async function staticAnalysis(content) {
                 "content": [
                     {
                         "type": "text",
-                        "text": `Act as a top static analysis tool for js, ts and tsx foles. I want you to analyze what is in this code. Scan for issues of any type. If everything looks good, just say that, don't make useless suggestion and don't praise the already-well written code. Make sure to keep your answer at the very minimum. Here's the code: ${content}`
+                        "text": `Act as a top static analysis tool for JS, TS and TSX files. I want you to analyze what is in this code. Scan for issues of any type. If everything looks good, just say that, don't make useless suggestions and don't praise the already-well written code. Make sure to keep your answer at the very minimum. Here's the code: ${content}`
                     }
                 ]
             }
