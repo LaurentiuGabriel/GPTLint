@@ -12,6 +12,7 @@ Install GPTLint globally using npm:
 ```
 npm install gptlint
 ```
+Add your OpenAI key as an environment variable with this key: ```OPENAI_KEY```
 
 ## Usage
 You can run GPTLint on an individual file or an entire directory. To use GPTLint, simply navigate to your project directory or the location of your file and run one of the following commands:

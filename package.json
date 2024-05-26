@@ -1,6 +1,6 @@
 {
   "name": "gptlint",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The AI static analysis tool",
   "main": "gptlint.js",
   "scripts": {
